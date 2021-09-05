@@ -1,0 +1,38 @@
+[
+    {
+        "username": "Goku",
+        "password": "password12345",
+        "postPostId": 4
+    },
+    {
+        "username": "Light",
+        "password": "password12345",
+        "postPostId": 1
+    },
+    {
+        "username": "Kyo",
+        "password": "password12345", 
+        "postPostId": 3
+    },
+    {
+        "username": "Yuki",
+        "password": "password12345", 
+        "postPostId": 2
+    },
+    {
+        "username": "Moon",
+        "password": "password12345",
+        "postPostId": null
+    },
+    {
+        "username": "Yoko",
+        "password": "password12345", 
+        "postPostId": null
+    },
+    {
+        "username": "Shadow",
+        "password": "password12345", 
+        "postPostId": null
+    }
+
+]
