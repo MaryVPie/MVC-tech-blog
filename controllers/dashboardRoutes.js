@@ -11,12 +11,7 @@ router.get('/', withAuth, async (req, res) => {
     const posts = await Post.findAll({ 
       where: { user_id: req.session.user_id },
       include: [{ model: Comment }, {model: User, attributes: { exclude: ['password'] }}],
-      raw: true,
-      nest: true
-    }).map(p => {
-      p.dateCreated = moment(p.dateCreated).format("M/D/YYYY");
-      return p;
-    });
+    }).map(p => p.get({plain: true}));
 
     console.log(posts);
     res.render('dashboard', {

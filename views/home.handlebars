@@ -1,0 +1,60 @@
+<h2>Welcome to my Blog</h2>
+
+{{> posts_part parameter=posts }}
+
+<script>
+    function redirectIfNonAuth(status) {
+        if(status == 403 || status == 401) 
+        {
+            document.location.replace('/login');
+        }
+    };
+
+    async function onPostClick(event) {
+        let tmpForm = document.getElementById('tmpCommentForm');
+        if(tmpForm != null)
+        {
+            let parent = tmpForm.parentNode;
+            parent.removeChild(tmpForm);
+        }
+        
+        console.log(event);
+        console.log(this);
+        var card = this;
+        var cardParent = this.parentNode;
+        console.log(card.id);
+        let postId = card.id.split("_")[1];
+
+        const response = await fetch('newComment');
+        redirectIfNonAuth(response.status);
+        let commentBlockHtml = await response.text();
+        
+        let wrapperDiv = document.createElement("div");
+        wrapperDiv.setAttribute('id','tmpCommentForm');
+        wrapperDiv.innerHTML = commentBlockHtml;
+        async function onFormSubmit (event) {
+            event.preventDefault();
+            let comment = this.querySelector('#comment').value.trim();
+            const response = await fetch(`/api/posts/${postId}/newComment`, {
+                                method: 'PUT',
+                                body: JSON.stringify({ content: comment }),
+                                headers: { 'Content-Type': 'application/json' },
+                            });
+                            redirectIfNonAuth(response.status);
+                            if (response.ok){
+                                document.location.replace('/');
+                            }                 
+
+        };
+
+        let formToSubmit = wrapperDiv.querySelector('form');
+        formToSubmit.addEventListener('submit', onFormSubmit.bind(formToSubmit))
+        cardParent.append(wrapperDiv);
+    };
+
+    let posts = document.querySelectorAll('[id^=post_]');
+    for (let i = 0; i < posts.length; i++) {
+        let post = posts[i];
+        post.addEventListener('click', onPostClick.bind(post));
+    }
+</script>

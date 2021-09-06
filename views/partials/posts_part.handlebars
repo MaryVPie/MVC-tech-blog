@@ -9,7 +9,7 @@
                 <div class="h4">{{post.title}}</div>
               </div>
               <div class="col-4 text-end">
-                Posted by {{post.user.username}} on {{post.dateCreated}} 
+                Posted by {{post.user.username}} on {{format_date post.dateCreated}} 
               </div>
           </div>
       </div>
@@ -19,4 +19,7 @@
     </div>
   </div>
 </div>
+    {{!-- {{log 'post view comments' post.comments}} --}}
+    {{> post_comments comments=post.comments }} 
+
 {{/each}}

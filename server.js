@@ -33,9 +33,12 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 const sess = {
   secret: 'Super secret secret',
-  cookie: {},
+  cookie: {
+    maxAge: 1*1000*60*20 // 1*1000(1sec)*60(1 min)*20 (20min) = 20 min for session.
+  },
   resave: false,
-  saveUninitialized: true,
+  rolling: false,
+  saveUninitialized: false,
   store: new SequelizeStore({
     db: sequelize
   })

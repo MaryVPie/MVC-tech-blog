@@ -24,34 +24,72 @@ router.put('/', withAuth, async (req, res) => {
 });
 
 
+router.put('/:id/newComment', async (req, res) => {
+  
+  if (!req.session.logged_in) {
+    res.status(403).json({message: "You should login first or your are not authorized to access the resource"});
+    return;
+  }
+
+  console.log(req.body);
+  console.log(req.params);
+  console.log(req.session);
+
+  let comment = Object.assign({}, req.body);
+  comment.post_id = req.params.id;
+  comment.user_id = req.session.user_id;
+  comment.dateCreated = new Date();
+
+  try {
+    let result = await Comment.create(comment);
+    res.status(201).json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json(error);
+  }
+});
 
 
 // a function to update the post 
 router.patch('/:id', withAuth, async (req, res) => {
   try {
-    let postId = req.re.postId;
+    let postId = req.params.id;
     let userId = req.session.user_id;
+    let updatedPost = req.body;
+    console.log(updatedPost);
 
     if (userId == null || !req.session.logged_in) {
       res.status(403);
       return;
     }
 
-    if (postId == '') {
-      postId = null;
+    if (postId == null || postId ==0 || postId == '') {
+      res.status(404);
+      return;
     }
 
-    let user = await User.findByPk(req.session.user_id);
-    
-    await user.update({postPostId:postId})
-    res.status(200);
+    let post = await Post.findByPk(postId, { raw: true });
+    console.log(post);
+    post.title = updatedPost.title;
+    post.content = updatedPost.content;
+    console.log(post);
+    let result = await Post.update(post, {
+      individualHooks: true,
+      where: {
+        id: req.params.id
+      }
+    });
+    console.log(result);
+
+    res.status(200).json(result);;
   } catch (err) {
-    res.status(400).json(err);
+    console.error(err);
+    res.status(500).json(err);
   }
 });
 
 router.delete('/:id', withAuth, async (req, res) => {
-  // delete one product by its `id` value
+
   try {
     let deletePost = await Post.destroy({
       where: {
