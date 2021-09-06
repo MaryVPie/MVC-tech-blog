@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="offset-3 col-6">
+    <div class="card">
+      <div class="card-header bg-dark text-light">
+        <div class="h4">Create New Post</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" required="required" name="title" id="title" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="content" class="form-label">Content</label>
+          <textarea rows="4" class="form-control" name="content" id="content"></textarea>
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{{> new_post_button }}
+
+
+<script src="./js/post.js"></script>
+

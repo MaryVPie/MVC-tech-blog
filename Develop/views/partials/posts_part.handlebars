@@ -1,0 +1,22 @@
+
+{{#each posts as |post|}}
+<div class="row py-2">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header bg-dark text-light">
+          <div class="row g-0">
+              <div class="col-8">
+                <div class="h4">{{post.title}}</div>
+              </div>
+              <div class="col-4 text-end">
+                Posted by {{post.user.username}} on {{post.dateCreated}} 
+              </div>
+          </div>
+      </div>
+      <div class="card-body">
+            <p class="card-text ">{{post.content}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{{/each}}
