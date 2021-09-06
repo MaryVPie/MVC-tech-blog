@@ -10,7 +10,22 @@ router.get('/', withAuth, async (req, res) => {
   try {
     const posts = await Post.findAll({ 
       where: { user_id: req.session.user_id },
-      include: [{ model: Comment }, {model: User, attributes: { exclude: ['password'] }}],
+      include: [
+        { 
+          model: Comment,
+          include: [
+            {
+              model: User
+            }
+          ]
+         }, 
+         {
+           model: User,
+           attributes: { 
+             exclude: ['password'] 
+            }
+          }
+      ],
     }).map(p => p.get({plain: true}));
 
     console.log(posts);
