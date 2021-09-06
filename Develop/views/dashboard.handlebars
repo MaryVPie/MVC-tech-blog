@@ -3,3 +3,22 @@
 {{> posts_part parameter=posts }}
 
 {{> new_post_button }}
+
+<script>
+    function onPostClick(event) { 
+        console.log(event);
+        console.log(this);
+        let card = this;
+        console.log(card.id);
+        let id = card.id.split("_")[1];
+        document.location.replace(`/updatePost/${id}`);
+    };
+    
+    let posts = document.querySelectorAll('[id^=post_]');
+    for(let i = 0; i < posts.length; i++){
+        let post = posts[i];
+        post.addEventListener('click', onPostClick.bind(post));
+    }
+
+
+</script>

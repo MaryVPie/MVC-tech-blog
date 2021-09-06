@@ -50,5 +50,23 @@ router.patch('/:id', withAuth, async (req, res) => {
   }
 });
 
+router.delete('/:id', withAuth, async (req, res) => {
+  // delete one product by its `id` value
+  try {
+    let deletePost = await Post.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    res.status(200).json(deletePost);
+
+  } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+  }
+ 
+});
+
 
 module.exports = router;
