@@ -13,33 +13,22 @@ SO THAT I can publish articles, blog posts, and my thoughts and opinions
 ```
 ## Screenshots and mockups of the page
 
-| <img src="assets/images/pixels.jpg" width="450" height="300" alt="Generated HTML"/>| ![Animation cycles through signing into the app, clicking on buttons, and updating blog posts.](./Assets/14-mvc-homework-demo-01.gif) |
-| --- | --- |
-|  Work done | Mockup |
-
-
+| <img src="Assets/Done.PNG" width="450" height="350" alt="Work done Home Page"/>| <img src="Assets/Mock.PNG" width="450" height="300" alt="Mockup Home Page"/> | 
+| --- | --- | 
+|  Work done Home Page | Mockup Home Page| 
 ## What's included
 
-- index.html:
-    - optimized for the accessibility needs
+This app follows the MVC paradigm  in its architectural structure, using Handlebars.js as the templating language, Sequelize as the ORM, and the express-session npm package for authentication.
 
-- styles.css
-  - optimized styles
-  - comments about how they are styling respective elements groups
-  
-- script.js:
-  - working with objects
-  - optimized code using functions
-
-- Technologies/Frameworks/Resources:
-  - JQuery
-  - server-side APIs
-  - materializecss
-  - google fonts
+- Technologies/Frameworks/Resources/Packages:
+  - MySQL
+  - express-handlebars
+  - bcrypt 
+  - Bootstrap
 
 ## Links to Review
 
-* The URL of the functional, deployed application:
+* The URL of the functional, deployed application on Heroku: https://technical-blog-mvpie.herokuapp.com/
 
 * The URL of the GitHub repository: https://github.com/MaryVPie/MVC-tech-blog
 
