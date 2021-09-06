@@ -14,7 +14,7 @@ const editPostFormHandler = async (event) => {
       body: JSON.stringify(post),
       headers: { 'Content-Type': 'application/json' },
     });
-    debugger;
+
     if (response.ok) {
       // If successful, redirect the browser to the profile page
       document.location.replace('/dashboard');

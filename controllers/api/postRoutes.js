@@ -90,25 +90,11 @@ router.patch('/:id', withAuth, async (req, res) => {
 
 router.delete('/:id', withAuth, async (req, res) => {
 
-  // try {
-  //   let deletePost = await Post.destroy({
-  //     where: {
-  //       id: req.params.id
-  //     }
-  //   });
-
-  //   res.status(200).json(deletePost);
-
-  // } catch (error) {
-  //     console.log(error);
-  //     res.status(500).json(error);
-  // }
- 
-  try {
+ try {
     let linkedComments = await Comment.findAll({ where: { post_id: req.params.id } });
     let selectedCommentIds = linkedComments.map(com=>com.id);
 
-    Comment.destroy({ where: { id: selectedCommentIds } });
+    await Comment.destroy({ where: { id: selectedCommentIds } });
     let postData = await Post.destroy({
       where: {
         id: req.params.id
